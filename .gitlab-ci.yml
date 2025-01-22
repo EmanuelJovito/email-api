@@ -1,0 +1,18 @@
+.build-image: &build-image
+  script:
+    - docker-compose -f deploy/docker/docker-compose.yml up -d --build
+  after_script:
+    - docker image prune -af
+
+stages:
+  - deploy
+
+deploy-production:
+  stage: deploy
+  variables:
+    CI_ENVIROMENT: 'production'
+  <<: *build-image
+  tags:
+    - docker.Melpomene
+  only:
+    - tags

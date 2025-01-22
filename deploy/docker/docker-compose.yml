@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  portal-nucleos-ceuma-frontend:
+    container_name: api-envio-email
+    build:
+      context: ../../
+      dockerfile: deploy/docker/Dockerfile
+      args:
+        - ENV_PATH=./deploy/env/.env.production
+    image: api-envio-email
+    ports:
+      - '1011:3000'
